@@ -5,4 +5,4 @@ Simple html file that fetches cat images from the amazing [Cat as a Service API]
 
 The code is available both as a single file as single-file.html or separated into index.html, script.js and style.css.
 
-[Cat API]: <https://cataas.com>
+[Cat as a Service API]: <https://cataas.com>
