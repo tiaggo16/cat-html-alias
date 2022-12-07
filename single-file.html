@@ -1,0 +1,139 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width">
+        <style>
+          *,
+          *::after,
+          *:before{
+              padding: 0;
+              margin: 0;
+              box-sizing: border-box;
+          }
+          html{
+              font:normal 20px/1.5 sans-serif;
+          }
+          h1{
+              margin: 1rem 2rem;
+          }
+          form{
+              margin: 2rem;
+              width: 800px;
+          }
+          .form-box{
+              padding: 1rem;
+              clear: both;
+              width: 100%;
+              position: relative;
+          }
+          .form-box label{
+              font-size: 1rem;
+              float: left;
+              width: 100px;
+              margin-right: 20px;
+          }
+          .form-box input{
+              font-size: 1rem;
+              width: 300px;
+              padding: 0.25rem 1rem;
+          }
+          .form-box select{
+              font-size: 1rem;
+              width: 300px;
+              padding: 0.25rem 1rem;
+          }
+          .form-box option{
+              font-size: 1rem;
+              width: 300px;
+              padding: 0.25rem 1rem;
+          }
+          .form-box button{
+              font-size: 1rem;
+              border: none;
+              padding: 0.25rem 2rem;
+              margin-right: 1rem;
+              color: white;
+              background-color: cornflowerblue;
+              cursor: pointer;
+          }
+          .row {
+              display: flex;
+          }
+          .column {
+              flex: 50%;
+          }
+          .comment {
+              font-size: 0.6rem;
+          }
+          .clickable-image
+          {
+              cursor: pointer;
+          }
+        </style>
+        <link rel="stylesheet" type="text/css" href="style.css" />
+    </head>
+    <body>
+        <h1>Fetch a cat from the Cat as a Service API!</h1>
+        <div class="row">
+            <div class="column">
+                <form class="form">
+                    <div class="form-box">
+                    <label for="type">Type</label>
+                    <select name="type" id="type" tabindex="1">
+                        <option value="">No selection</option>
+                        <option value="small">Small</option>
+                        <option value="medium">Medium</option>
+                        <option value="square">Square</option>
+                        <option value="original">Original</option>
+                    </select>
+                    <div class="comment">
+                    <p>Selecting a type may prevent width/height selection from working.</p>
+                    </div>
+                    </div>
+                    <div class="form-box">
+                    <label for="filter">Filter</label>
+                    <select name="filter" id="filter" tabindex="2">
+                        <option value="">No selection</option>
+                        <option value="blur">Blur</option>
+                        <option value="mono">Mono</option>
+                        <option value="sepia">Sepia</option>
+                        <option value="negative">Negative</option>
+                        <option value="pixel">Pixel</option>
+                    </select>
+                    </div>
+                    <div class="form-box"> 
+                        <label for="width">Width</label>
+                        <input name="width" type="number" min="0" id="width" oninput="validity.valid||(value='');" placeholder="In pixels" autofocus tabindex="3"/>
+                    </div>
+                    <div class="form-box">
+                        <label for="height">Height</label>
+                        <input name="height" type="number" id="height" min="0" oninput="validity.valid||(value='');" placeholder="In pixels" tabindex="4" />
+                    </div>
+                    <div class="form-box">
+                        <button type= "button" id="btn">Fetch a cat!</button>
+                    </div>
+                </form>
+            </div>
+            <div class="column">
+                <img class="clickable-image" id="image" title="Too big? Click to open image on a new page!" onclick="window.open(this.src)">
+            </div>
+        </div>
+        <script>
+          let btn = document.getElementById('btn')
+          let image = document.getElementById('image')
+
+          btn.addEventListener('click', function(){
+            fetch('https://cataas.com/cat?json=true&' + new URLSearchParams({
+              type: document.getElementById('type').value,
+              filter: document.getElementById('filter').value,
+              width: document.getElementById('width').value,
+              height: document.getElementById('height').value
+            }))
+              .then(res => (res.json()))
+              .then(result => {
+                image.src = "https://cataas.com" + result.url 
+                }) 
+              .catch(error => console.log(error));
+          })
+        </script>
+    </body>
+</html>

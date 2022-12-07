@@ -1,0 +1,54 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width">
+        <link rel="stylesheet" type="text/css" href="style.css" />
+    </head>
+    <body>
+        <h1>Fetch a cat from the Cats API!</h1>
+        <div class="row">
+            <div class="column">
+                <form class="form">
+                    <div class="form-box">
+                    <label for="type">Type</label>
+                    <select name="type" id="type" tabindex="1">
+                        <option value="">No selection</option>
+                        <option value="small">Small</option>
+                        <option value="medium">Medium</option>
+                        <option value="square">Square</option>
+                        <option value="original">Original</option>
+                    </select>
+                    <div class="comment">
+                    <p>Selecting a type may prevent width/height selection from working.</p>
+                    </div>
+                    </div>
+                    <div class="form-box">
+                    <label for="filter">Filter</label>
+                    <select name="filter" id="filter" tabindex="2">
+                        <option value="">No selection</option>
+                        <option value="blur">Blur</option>
+                        <option value="mono">Mono</option>
+                        <option value="sepia">Sepia</option>
+                        <option value="negative">Negative</option>
+                        <option value="pixel">Pixel</option>
+                    </select>
+                    </div>
+                    <div class="form-box"> 
+                        <label for="width">Width</label>
+                        <input name="width" type="number" min="0" id="width" oninput="validity.valid||(value='');" placeholder="In pixels" autofocus tabindex="3"/>
+                    </div>
+                    <div class="form-box">
+                        <label for="height">Height</label>
+                        <input name="height" type="number" id="height" min="0" oninput="validity.valid||(value='');" placeholder="In pixels" tabindex="4" />
+                    </div>
+                    <div class="form-box">
+                        <button type= "button" id="Fetch from API">Fetch a cat!</button>
+                    </div>
+                </form>
+            </div>
+            <div class="column">
+                <img class="clickable-image" id="image" title="Too big? Click to open image on a new page!" onclick="window.open(this.src)">
+            </div>
+        </div>
+        <script src="script.js"></script>
+    </body>
+</html>
